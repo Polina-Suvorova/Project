@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<html>
+<head>
+<style>
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #abb9ff;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4b438c;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+img {
+    float: right;
+}
+</style>
+</head>
+
+<head>
+    <title>Карта европейской части РФ, на которой отмечены места проведения «Высшей пробы»</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+        var myMap, 
+            myPlacemark;
+	
+	var points = [
+                [55.763721, 37.636275], //москва
+                [50.624235, 36.581276], //белгород
+                [48.723599, 44.521781], //ВОлгоград
+                [51.713383, 39.185806], //Воронеж
+                [45.040579, 39.112225], //краснодар
+				[51.738142, 36.148018], //курск
+                [52.643286, 39.645708], //липецк
+                [45.041891, 41.984975], //ставрополь
+				// Города с призерами
+				[53.243325, 34.363731], //брянск
+				[56.967836, 41.966406], //ивановская область
+				[58.344108, 49.695430], //кировская область
+				[44.429866, 40.252969], //адыгея
+				[42.259793, 47.095742], //дагестан
+				[57.817361, 39.105138] //ярославль
+			    ];
+
+        function init(){ 
+            myMap = new ymaps.Map("map", {
+                center: [51.713383, 39.185806], 
+                zoom: 4
+            }); 
+			pm0 = new ymaps.Placemark(points[0], {balloonContent: 'Средний балл - 55,23',
+			                                     hintContent: 'Москва'});
+			pm1 = new ymaps.Placemark(points[1], {hintContent: 'Белгород',
+												 balloonContent: 'Средний балл - 0'});
+			pm2 = new ymaps.Placemark(points[2], {hintContent: 'Волгоград',
+												 balloonContent: 'Средний балл - 0'});
+			pm3 = new ymaps.Placemark(points[3], {hintContent: 'Воронеж',
+												 balloonContent: 'Средний балл - 0'});
+			pm4 = new ymaps.Placemark(points[4], {hintContent: 'Краснодар',
+												 balloonContent: 'Средний балл - 60'});
+			pm5 = new ymaps.Placemark(points[5], {hintContent: 'Курск',
+												 balloonContent: 'Средний балл - 0'});
+			pm6 = new ymaps.Placemark(points[6], {hintContent: 'Липецк',
+												 balloonContent: 'Средний балл - 0'});
+			pm7 = new ymaps.Placemark(points[7], {hintContent: 'Ставрополь',
+												 balloonContent: 'Средний балл - 52'});
+			pm8 = new ymaps.Placemark(points[8], {hintContent: 'Брянск',
+												 balloonContent: 'Средний балл - 60'}, {
+                                                 preset: 'islands#greenDotIconWithCaption'});
+			pm9 = new ymaps.Placemark(points[9], {hintContent: 'Иваново',
+												 balloonContent: 'Средний балл - 43'}, {
+                                                 preset: 'islands#greenDotIconWithCaption'});
+			pm10 = new ymaps.Placemark(points[10], {hintContent: 'Киров',
+												 balloonContent: 'Средний балл - 52'}, {
+                                                 preset: 'islands#greenDotIconWithCaption'});
+			pm11 = new ymaps.Placemark(points[11], {hintContent: 'Республика Адыгея',
+												 balloonContent: 'Средний балл - 94'}, {
+                                                 preset: 'islands#greenDotIconWithCaption'});
+			pm12 = new ymaps.Placemark(points[12], {hintContent: 'Республика Дагестан',
+												 balloonContent: 'Средний балл - 40'}, {
+                                                 preset: 'islands#greenDotIconWithCaption'});
+			pm13 = new ymaps.Placemark(points[13], {hintContent: 'Ярославль',
+												 balloonContent: 'Средний балл - 100'}, {
+                                                 preset: 'islands#greenDotIconWithCaption'});
+			
+			myMap.geoObjects.add(pm0)
+							.add(pm1)
+							.add(pm2)
+							.add(pm3)
+							.add(pm4)
+							.add(pm5)
+							.add(pm6)
+							.add(pm7)
+							.add(pm8)
+							.add(pm9)
+							.add(pm10)
+							.add(pm11)
+							.add(pm12)
+							.add(pm13);
+        }
+    </script>
+</head>
+
+ <head>
+  <meta charset="utf-8">
+  <script src="https://www.google.com/jsapi"></script>
+  <script>
+   google.load("visualization", "1", {packages:["corechart"]});
+   google.setOnLoadCallback(drawChart);
+   function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+     ['Количество баллов', 'Количество призеров', { role: 'style' }],
+     ['40-45', 28, 'color: #ffff4f'],
+	 ['46-50', 5, 'color: #ffff4f'],
+     ['51-55', 7, 'color: #ffff4f'],
+	 ['56-60', 13, 'color: #abd059'],
+     ['61-65', 3, 'color: #abd059'],
+     ['66-70', 1, 'color: #abd059'],
+	 ['71-75', 2, 'color: #abd059'],
+	 ['76-80', 7, 'color: #abd059'],
+	 ['81-85', 0, 'color: #30a768'],
+	 ['86-90', 0, 'color: #30a768'],
+	 ['91-95', 1, 'color: #30a768'],
+	 ['96-100', 5, 'color: #30a768']
+    ]);
+    var options = {
+     title: 'Призеры олимпиады',
+     hAxis: {title: 'Количество баллов'},
+     vAxis: {title: 'Количесто призеров'}
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+    chart.draw(data, options);
+   }
+  </script>
+ </head>
+ 
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'People'],
+          ['Москова',    56],
+          ['Московская область',    3],
+		  ['Республика Адыгея',     3],
+          ['Ивановская область',      2],
+          ['Кировская область',  2],
+          ['Ставропольский край',  2],
+          ['Брянская область',     1],
+          ['Краснодарский край', 1],
+          ['Республика Дагестан',      1],
+          ['Ярославская область', 1]
+        ]);
+
+        var options = {
+          title: 'Призеры в регионах',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+ 
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'People'],
+          ['Призеры в городах проведения',    61],
+          ['Иногородние призеры',    10]
+        ]);
+
+        var options = {
+          title: 'Соотношение регионов',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart2'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  
+  
+<body bgcolor="#f0f0f0", style="background-image:url('https://pp.userapi.com/c847019/v847019994/6618f/6ECn8V1H8MA.jpg') ;
+             background-repeat: no-repeat;
+             background-position: top center;
+			 margin: auto;">
+
+<div>
+  <form action="/action_page.php">
+    <label for="country">Класс</label>
+    <select id="country" name="country">
+      <option value="11">11</option>
+    </select>
+
+    <label for="country">Предмет</label>
+    <select id="country" name="country">
+      <option value="математика">Математика</option>
+    </select>
+  
+    <input type="submit" value="Результаты">
+  </form>
+</div>
+
+    <h1 style="color:#263269;">Города проведения заключительного этапа олимпиады "Высшая проба"<h1>
+    <div id="map" style="width: 98%; height: 400px; margin: auto;"></div>
+	<img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/%D0%92%D1%8B%D1%81%D1%88%D0%B0%D1%8F_%D0%BF%D1%80%D0%BE%D0%B1%D0%B0.png", alt="Высшая проба", style= "width:30%; height:30%">
+	<div id="chart" style="width: 55%; height: 450px;"></div>
+	<img src="https://www.hse.ru/data/2016/02/16/1139197151/IMG_3893.jpg", alt="Высшая проба", style="width: 30%; height: 30%;float:right;">
+	<div id="donutchart" style="width: 55%; height: 450px;"></div>
+	<img src="https://www.hse.ru/data/2016/02/16/1139197880/_PIC9998.jpg", alt="Высшая проба", style="float:right;width:30%; height:30%;">
+	<div id="donutchart2" style="width: 55%; height: 450px;"></div>
+	<img src="https://www.hse.ru/data/2016/02/16/1139197858/IMG_3900.jpg", alt="Высшая проба", style="float:right;width:30%; height:30%;">
+</body>
+</html>
+
